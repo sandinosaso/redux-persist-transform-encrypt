@@ -13,7 +13,7 @@ export const makeEncryptor = transform => (state, key) => {
   return transform(state)
 }
 
-export const makeDecryptor = (transform, onError) => (state, key) => {
+export const makeDecryptor = (transform, onError, initialState) => (state, key) => {
   if (typeof state !== 'string') {
     handleError(
       onError,
@@ -27,6 +27,6 @@ export const makeDecryptor = (transform, onError) => (state, key) => {
     return transform(state)
   } catch (err) {
     handleError(onError, err)
-    return null
+    return initialState;
   }
 }

@@ -17,10 +17,10 @@ const makeSyncDecryptor = (secretKey, onError) =>
         'Could not decrypt state. Please verify that you are using the correct secret key.'
       )
     }
-  }, onError)
+  }, onError, initialState)
 
 export default config => {
   const inbound = makeSyncEncryptor(config.secretKey)
-  const outbound = makeSyncDecryptor(config.secretKey, config.onError)
+  const outbound = makeSyncDecryptor(config.secretKey, config.onError, config.initialState)
   return createTransform(inbound, outbound, config)
 }
